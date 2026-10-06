@@ -38,7 +38,7 @@
   s.async = true;
   if (cfg.provider === "goatcounter" && cfg.goatcounter) {
     // Count the page without the hash: the hash carries the section, which we never record.
-    window.goatcounter = { no_onload: true };
+    window.goatcounter = { no_onload: true, allow_local: Boolean(cfg.allowLocal) };
     s.src = "https://gc.zgo.at/count.js";
     s.setAttribute("data-goatcounter", "https://" + cfg.goatcounter + ".goatcounter.com/count");
     s.onload = function () {
