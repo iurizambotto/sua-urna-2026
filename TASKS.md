@@ -21,8 +21,8 @@ Ver [[AGENTS - sua-urna-2026]] e [[Síntese de pesquisa - Sua Urna 2026]].
 - [x] T-013 · Interface v2: paleta vermelho, branco e preto, tipografia própria, seletor de tema, fatos em cards com filtro por tema, roteiros em abas com botão de copiar, imagem de compartilhamento com os pontos da seção, seletores ordenados, mensagem de esforço por pessoa (2026-10-06)
 - [ ] T-004 · Kits de conversa por perfil (7 perfis) em site/kits.js (escrito, falta revisão do dono)
 - [ ] T-005 · Fatos com fonte e status em site/kits.js, 20 fatos (escrito, falta conferir cada URL com um link checker)
-- [ ] T-006 · Rodar o pipeline por prioridade: RMSP, depois SP, MG, PR, RS (leva 1, desde 09:20) e SC, RJ, ES, GO, DF, MS, MT (leva 2, encadeada); validar cada UF contra os totais do TSE; Norte e Nordeste fora por ora
-- [ ] T-007 · Deploy no Cloudflare Pages com domínio em nome de pessoa física e identificação visível do responsável (humano). Decidir se `site/data` vai versionado (cerca de 70 MB para SP, MG, PR e RS) ou gerado no build
+- [ ] T-006 · Rodar o pipeline por prioridade: RMSP, depois SP, MG, PR, RS (leva 1, desde 09:20) e SC, RJ, ES, GO, DF, MS, MT (leva 2, encadeada); validar cada UF contra os totais do TSE; Norte e Nordeste em coleta paralela desde 12:10
+- [x] T-007 · MVP publicado em GitHub Pages por workflow (`.github/workflows/pages.yml`, repositório público `iurizambotto/sua-urna-2026`, dados versionados em `site/data`), com `noindex` enquanto for só para amigos (2026-10-06). Pendente para o lançamento: tirar o `noindex`, avaliar Cloudflare Pages e domínio em nome de pessoa física
 - [ ] T-008 · Cinco vídeos verticais de 45 s derivados do site, sem IA de voz ou rosto
 - [ ] T-009 · Distribuição: Filipe Boni, equipe digital da campanha, criadores, grupos pessoais
 - [ ] T-010 · Atualizar fatos após o debate de 11/10 e a AtlasIntel de 09/10

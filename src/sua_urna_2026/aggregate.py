@@ -4,6 +4,7 @@ from __future__ import annotations
 
 import json
 import logging
+import os
 from datetime import UTC, datetime
 from pathlib import Path
 from typing import Any
@@ -57,8 +58,11 @@ class OutputWriter:
         self.root = root
 
     def _dump(self, path: Path, payload: dict[str, Any]) -> None:
+        """Atomic write: parallel collectors and the site never see a half written file."""
         path.parent.mkdir(parents=True, exist_ok=True)
-        path.write_text(json.dumps(payload, ensure_ascii=False, separators=(",", ":")), "utf-8")
+        tmp = path.with_name(f".{path.name}.{os.getpid()}.tmp")
+        tmp.write_text(json.dumps(payload, ensure_ascii=False, separators=(",", ":")), "utf-8")
+        os.replace(tmp, path)
 
     def has_municipio(self, uf: Uf, municipio: Municipio) -> bool:
         return (self.root / uf.cd / f"{municipio.cd}.json").exists()
