@@ -24,6 +24,8 @@ Ver [[AGENTS - sua-urna-2026]] e [[Síntese de pesquisa - Sua Urna 2026]].
 - [ ] T-006 · Rodar o pipeline por prioridade: RMSP, depois SP, MG, PR, RS (leva 1, desde 09:20) e SC, RJ, ES, GO, DF, MS, MT (leva 2, encadeada); validar cada UF contra os totais do TSE; Norte e Nordeste em coleta paralela desde 12:10
 - [x] T-007 · MVP publicado em GitHub Pages por workflow (`.github/workflows/pages.yml`, repositório público `iurizambotto/sua-urna-2026`, dados versionados em `site/data`), com `noindex` enquanto for só para amigos (2026-10-06). Pendente para o lançamento: tirar o `noindex`, avaliar Cloudflare Pages e domínio em nome de pessoa física
 - [ ] T-008 · Cinco vídeos verticais de 45 s derivados do site, sem IA de voz ou rosto
+- [x] T-014 · Compartilhamento e medição: páginas por município com prévia própria (3.633 páginas, 896 imagens), botão de WhatsApp por roteiro, origem marcada nos links, camada de medição anônima até a zona, texto de privacidade reescrito (2026-10-06)
+- [ ] T-015 · Dono cria a conta no GoatCounter e informa o código; preencher `site/config.js`
 - [ ] T-009 · Distribuição: Filipe Boni, equipe digital da campanha, criadores, grupos pessoais
 - [ ] T-010 · Atualizar fatos após o debate de 11/10 e a AtlasIntel de 09/10
 

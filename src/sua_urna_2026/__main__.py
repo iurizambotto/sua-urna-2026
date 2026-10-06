@@ -13,6 +13,7 @@ from sua_urna_2026 import tse_urls as urls
 from sua_urna_2026.aggregate import OutputWriter, parse_cs_config, parse_municipio_totals
 from sua_urna_2026.filters import MunicipioFilter
 from sua_urna_2026.models import Municipio, SectionResult, Uf
+from sua_urna_2026.share_pages import SharePages
 from sua_urna_2026.tse_client import TseClient
 
 log = logging.getLogger("sua_urna_2026")
@@ -140,6 +141,12 @@ async def plan(args: argparse.Namespace) -> None:
     OutputWriter(Path(args.out)).write_plan(order, totals)
 
 
+async def pages(args: argparse.Namespace) -> None:
+    site = Path(args.out).parent
+    stats = SharePages(site, base_url=args.base_url, min_aptos_own_image=args.min_aptos).run()
+    log.info("share pages: %s", stats)
+
+
 def build_parser() -> argparse.ArgumentParser:
     parser = argparse.ArgumentParser(prog="sua_urna_2026")
     sub = parser.add_subparsers(dest="command", required=True)
@@ -151,6 +158,16 @@ def build_parser() -> argparse.ArgumentParser:
     pl.add_argument("--out", default=os.environ.get("SUA_URNA_DATA_DIR", "site/data"))
     pl.add_argument("--rate", type=float, default=10.0)
     pl.set_defaults(func=plan)
+    pg = sub.add_parser("pages", help="write per-municipality share pages and preview images")
+    pg.add_argument("--out", default=os.environ.get("SUA_URNA_DATA_DIR", "site/data"))
+    pg.add_argument(
+        "--base-url",
+        default=os.environ.get("SUA_URNA_BASE_URL", "https://iurizambotto.github.io/sua-urna-2026"),
+    )
+    pg.add_argument(
+        "--min-aptos", type=int, default=20_000, help="own preview image above this size"
+    )
+    pg.set_defaults(func=pages)
     f = sub.add_parser("fetch", help="download TSE results and write static JSON")
     f.add_argument("--uf", required=True, help="two letter state code or 'all'")
     f.add_argument("--municipios", default=None, help="comma separated municipality codes")

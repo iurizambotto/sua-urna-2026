@@ -6,7 +6,8 @@ INTERVAL="${INTERVAL:-600}"
 collecting() { ps -eo args | grep -qE "^bash scripts/run_queue.sh|^(python|/[^ ]*python) -m sua_urna_2026 fetch"; }
 publish() {
   .venv/bin/python -m sua_urna_2026 reindex --out site/data >/dev/null 2>&1
-  git add site/data
+  .venv/bin/python -m sua_urna_2026 pages --out site/data >/dev/null 2>&1
+  git add site/data site/m site/og
   if git diff --cached --quiet; then echo "$(date '+%F %T') sem mudanças"; return; fi
   local estados
   estados=$(python3 -c "import json; pr=json.load(open('site/data/progress.json')); print(sum(1 for v in pr['ufs'].values() if v['municipios_ok']==v['municipios_total']))")

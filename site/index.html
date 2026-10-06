@@ -6,10 +6,22 @@
 <title>Sua Urna 2026</title>
 <meta name="robots" content="noindex">
 <meta name="description" content="Quantas pessoas da sua seção eleitoral decidem o segundo turno de 2026, e como conversar com elas. Números oficiais do TSE, seção por seção.">
+<meta property="og:type" content="website">
+<meta property="og:locale" content="pt_BR">
+<meta property="og:site_name" content="Sua urna">
+<meta property="og:title" content="1 em cada 48: a sua urna decide o 2º turno">
+<meta property="og:description" content="Veja quantas pessoas da sua seção eleitoral precisam mudar de ideia para virar a eleição. Números oficiais do TSE, seção por seção.">
+<meta property="og:url" content="https://iurizambotto.github.io/sua-urna-2026/">
+<meta property="og:image" content="https://iurizambotto.github.io/sua-urna-2026/og/brasil.jpg">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="twitter:card" content="summary_large_image">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,700;12..96,800&family=Public+Sans:ital,wght@0,400;0,600;0,700;1,400&display=swap">
 <link rel="stylesheet" href="style.css">
+<script src="config.js"></script>
+<script src="analytics.js" defer></script>
 <script>
   // Theme boot: apply the saved choice before first paint. "system" leaves data-theme unset.
   (function () { try { var t = localStorage.getItem("tema"); if (t === "dark" || t === "light") document.documentElement.setAttribute("data-theme", t); } catch (e) {} })();
@@ -42,7 +54,7 @@
     <div class="sec-head">
       <p class="kicker">Passo 1</p>
       <h2>Encontre a sua seção</h2>
-      <p class="muted small">Zona e seção estão no seu título, no e-Título ou no comprovante de votação. Este site não pede nem guarda o número do título. Nada que você escolher aqui sai do seu celular.</p>
+      <p class="muted small">Zona e seção estão no seu título, no e-Título ou no comprovante de votação. Este site não pede o número do título. Contamos acessos e cliques de forma anônima, sem cookie e sem guardar IP, só até o nível da zona eleitoral, nunca a seção.</p>
     </div>
     <div class="campos">
       <label>Estado <select id="uf"><option value="">Escolha</option></select></label>
@@ -109,7 +121,7 @@
 </main>
 
 <footer class="wrap">
-  <p>Responsável: Iuri Zambotto, eleitor, pessoa física. Site sem financiamento de partido, candidato ou empresa, sem impulsionamento pago, sem anúncio e sem coleta de dados. Opinião de eleitor, com números oficiais do TSE.</p>
+  <p>Responsável: Iuri Zambotto, eleitor, pessoa física. Site sem financiamento de partido, candidato ou empresa, sem impulsionamento pago e sem anúncio. Medimos acessos de forma anônima e agregada, sem cookie, sem IP e sem nada abaixo da zona eleitoral. Opinião de eleitor, com números oficiais do TSE.</p>
   <p>Nenhum conteúdo deste site foi gerado com voz ou imagem sintética. Os textos foram escritos com apoio de ferramenta de inteligência artificial e revisados por pessoa.</p>
   <p><a href="progresso.html">Progresso da coleta</a></p>
 </footer>

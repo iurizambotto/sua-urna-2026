@@ -134,13 +134,29 @@
   function setStatus(msg) { $("status").textContent = msg || ""; }
 
   function parseHash() {
-    const m = location.hash.match(/^#([a-z]{2})\/(\d{5})\/(\d{4})\/(\d{4})$/);
-    return m ? { uf: m[1], municipio: m[2], zona: m[3], secao: m[4] } : null;
+    const m = location.hash.match(/^#([a-z]{2})\/(\d{5})(?:\/(\d{4})\/(\d{4}))?$/);
+    return m ? { uf: m[1], municipio: m[2], zona: m[3] || "", secao: m[4] || "" } : null;
+  }
+
+  const track = (name, props) => { try { if (window.track) window.track(name, props); } catch (e) { /* never break the page */ } };
+  const onde3 = () => ({ uf: state.uf, municipio: state.municipio, zona: state.zona });
+
+  function siteBase() { return location.href.split(/[?#]/)[0].replace(/index\.html$/, ""); }
+
+  // Link that previews well in WhatsApp: the municipality page carries its own image.
+  function shareUrl(origem) {
+    const q = `?r=${origem}`;
+    if (state.uf && state.municipio) {
+      const tail = state.zona && state.secao ? `#${state.zona}/${state.secao}` : "";
+      return `${siteBase()}m/${state.uf}/${state.municipio}.html${q}${tail}`;
+    }
+    return `${siteBase()}${q}`;
   }
 
   async function selectPath(p) {
     sel.uf.value = p.uf; await onUf();
     sel.municipio.value = p.municipio; await onMunicipio();
+    if (!p.zona) { $("busca").scrollIntoView({ behavior: reduced ? "auto" : "smooth", block: "start" }); return; }
     sel.zona.value = p.zona; await onZona();
     sel.secao.value = p.secao; onSecao();
   }
@@ -186,7 +202,8 @@
     if (!state.secao) { $("resultado").hidden = true; return; }
     const s = state.zonaData.secoes.find((x) => x.secao === state.secao);
     const hash = `${state.uf}/${state.municipio}/${state.zona}/${state.secao}`;
-    if (location.hash.slice(1) !== hash) history.replaceState(null, "", `#${hash}`);
+    if (location.hash.slice(1) !== hash) history.replaceState(null, "", `${location.search}#${hash}`);
+    track("secao", onde3());
     render(s);
   }
 
@@ -231,6 +248,7 @@
     const soltos = m.ausentes + m.brancoNulo + m.terceira;
     $("soltos").textContent = `${fmt(soltos)} pessoas desta sala não escolheram nenhum dos dois que estão no segundo turno: ${fmt(m.ausentes)} não apareceram, ${fmt(m.brancoNulo)} votaram branco ou nulo e ${fmt(m.terceira)} votaram em Cury, Renan ou Caiado. Você conhece alguma delas.`;
     state.last = { s, m, onde };
+    if (state.kit) renderKit(state.kit);
     r.scrollIntoView({ behavior: reduced ? "auto" : "smooth", block: "start" });
   }
 
@@ -247,7 +265,7 @@
 
   function shareText() {
     const { m, onde } = state.last;
-    const url = location.href.split("#")[0] + location.hash;
+    const url = shareUrl("wa");
     const [titulo, sub] = manchete(m);
     return [
       `Na nossa seção (${onde}) tinham ${fmt(m.aptos)} eleitores.`,
@@ -264,6 +282,7 @@
       const ta = document.createElement("textarea");
       ta.value = text; document.body.appendChild(ta); ta.select(); document.execCommand("copy"); ta.remove();
     }
+    track("copiar-texto", onde3());
     toast("Texto copiado. Cole no WhatsApp.");
   }
 
@@ -321,6 +340,7 @@
     $("baixar").href = url;
     $("baixar").download = `sua-urna-${state.uf}-${state.municipio}-${state.zona}-${state.secao}.png`;
     $("preview").classList.add("on");
+    track("gerar-imagem", onde3());
     toast("Imagem pronta.");
   }
 
@@ -351,7 +371,7 @@
         <span class="t">${k.titulo}</span>
         <span class="s">${k.stat}</span>
       </button>`).join("");
-    $("personas").querySelectorAll(".pessoa").forEach((b) => b.addEventListener("click", () => { renderKit(b.dataset.kit); $("kit").scrollIntoView({ behavior: reduced ? "auto" : "smooth", block: "nearest" }); }));
+    $("personas").querySelectorAll(".pessoa").forEach((b) => b.addEventListener("click", () => { renderKit(b.dataset.kit); track("perfil", { perfil: b.dataset.kit }); $("kit").scrollIntoView({ behavior: reduced ? "auto" : "smooth", block: "nearest" }); }));
     renderKit(window.KITS[0].id);
   }
 
@@ -366,15 +386,23 @@
       <h4>Para abrir</h4>
       <p class="fala">${k.abrir}</p>
       <h4>Três fatos, com fonte</h4>
-      <div class="fatos-kit">${k.fatos.map((fid) => { const f = fato(fid); return f ? `<div class="fato-mini"><span>${f.texto}</span><span class="src"><a href="${f.url}" target="_blank" rel="noopener">${f.fonte}</a>, ${f.data} ${tag(f.status)}</span></div>` : ""; }).join("")}</div>
+      <div class="fatos-kit">${k.fatos.map((fid) => { const f = fato(fid); return f ? `<div class="fato-mini"><span>${f.texto}</span><span class="src"><a data-fato="${f.id}" href="${f.url}" target="_blank" rel="noopener">${f.fonte}</a>, ${f.data} ${tag(f.status)}</span></div>` : ""; }).join("")}</div>
       <h4>O que não dizer</h4>
       <ul class="nao">${k.naoDizer.map((t) => `<li>${t}</li>`).join("")}</ul>
       <h4>Para fechar</h4>
       <p class="fala">${k.fechar}</p>
-      <div class="acoes"><button type="button" class="ghost" id="copiar-kit">Copiar este roteiro</button></div>`;
+      <div class="acoes">
+        <a class="cta" id="whats-kit" target="_blank" rel="noopener" href="#">Mandar mensagem no WhatsApp</a>
+        <button type="button" class="ghost" id="copiar-kit">Copiar este roteiro</button>
+      </div>
+      <p class="small muted">A mensagem abre no WhatsApp para você escolher a pessoa e editar antes de enviar.${state.last ? " O link leva aos números da sua seção." : " Escolha a sua seção acima e o link passa a levar aos números dela."}</p>`;
+    const msg = `${k.mensagem} ${shareUrl(`wa-${k.id}`)}`;
+    $("whats-kit").href = `https://wa.me/?text=${encodeURIComponent(msg)}`;
+    $("whats-kit").addEventListener("click", () => track("whatsapp-roteiro", { perfil: k.id, ...onde3() }));
     $("copiar-kit").addEventListener("click", async () => {
       const text = [k.titulo, "", `Para abrir: ${k.abrir}`, "", ...k.fatos.map((fid) => { const f = fato(fid); return f ? `- ${f.texto} (${f.fonte}, ${f.data}: ${f.url})` : ""; }), "", `O que não dizer: ${k.naoDizer.join(" ")}`, "", `Para fechar: ${k.fechar}`].join("\n");
       try { await navigator.clipboard.writeText(text); } catch (e) { /* ignore */ }
+      track("copiar-roteiro", { perfil: k.id });
       toast("Roteiro copiado.");
     });
   }
@@ -396,7 +424,7 @@
       <article class="fato" id="${f.id}" ${state.filtro !== "todos" && f.tema !== state.filtro ? "hidden" : ""}>
         <span class="tema">${window.TEMAS[f.tema] || f.tema}</span>
         <p>${f.texto}</p>
-        <div class="rodape"><span><a href="${f.url}" target="_blank" rel="noopener">${f.fonte}</a> · ${f.data} · ${dominio(f.url)}</span>${tag(f.status)}</div>
+        <div class="rodape"><span><a data-fato="${f.id}" href="${f.url}" target="_blank" rel="noopener">${f.fonte}</a> · ${f.data} · ${dominio(f.url)}</span>${tag(f.status)}</div>
       </article>`).join("");
   }
 
@@ -422,6 +450,11 @@
   sel.municipio.addEventListener("change", onMunicipio);
   sel.zona.addEventListener("change", onZona);
   sel.secao.addEventListener("change", onSecao);
+  $("baixar").addEventListener("click", () => track("baixar-imagem", onde3()));
+  document.addEventListener("click", (ev) => {
+    const a = ev.target.closest("a[data-fato]");
+    if (a) track("fonte", { fato: a.dataset.fato });
+  });
   $("copiar").addEventListener("click", copiar);
   $("imagem").addEventListener("click", imagem);
   init();

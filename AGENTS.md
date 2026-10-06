@@ -80,6 +80,9 @@ Números na urna: 13 Lula, 22 Flávio Bolsonaro, 55 Caiado, 14 Renan Santos, 70 
 | Esforço sempre expresso por pessoa ("uma em cada N que votaram no Lula trouxer uma pessoa") e nunca só o total de trocas | "30 pessoas mudando de ideia" assusta; a conta por pessoa é a mesma matemática e soa possível (feedback do dono) | 2026-10-06 |
 | Roteiros escolhidos por cards de pessoa (`.pessoa`), com ponto na cor do grupo, título escrito como gente e um número de tamanho do grupo; o card prioritário ocupa duas colunas | Pills pareciam filtro de busca; cards de pessoa dizem "quem é a pessoa" e fecham a grade com 7 itens | 2026-10-06 |
 | Classes de CSS: botão de tema é `.tema-btn`, nunca `.tema`, que é a etiqueta de tema dos cards de fato | Colisão de nome quebrou as etiquetas em 2026-10-06 | 2026-10-06 |
+| Páginas por município em `site/m/<uf>/<cd>.html` (comando `pages`), cada uma com `og:image` própria em `site/og/<uf>/<cd>.jpg` para municípios com 20 mil eleitores ou mais e a imagem do estado para os demais; a página redireciona para `index.html` mantendo `?r=` e a seção do hash | WhatsApp não lê o hash, então link de app de página única mostra sempre a mesma prévia | 2026-10-06 |
+| Medição anônima por `analytics.js` com `window.track(nome, props)`, desligada até `config.js` ter provedor; nunca registra a seção (máximo a zona), sem cookie, pageview sem hash; links compartilhados levam `?r=wa` ou `?r=wa-<perfil>` | Decisão do dono: até a zona; opinião política é dado sensível na LGPD | 2026-10-06 |
+| Provedor recomendado: GoatCounter (grátis, sem cartão, sem cobrança por excedente; eventos codificados no caminho `evento/<nome>/<props>`) | Umami Hobby tem 100 mil eventos por mês e cobra por evento excedente | 2026-10-06 |
 | Página `progresso.html` lê `plan.json`, `progress.json` e `rate.json`; unidade de progresso é o município | O pipeline grava o município inteiro de uma vez; a estimativa usa a taxa medida na própria coleta (28 a 35 seções/s) | 2026-10-06 |
 | Painel "Dá para virar" calcula a urna média a partir de `data/brasil.json`, não de número fixo | Os 318, 112, 108, 19, 12 e 67 do vídeo saem do próprio TSE e ficam auditáveis | 2026-10-06 |
 | Teste visual por Playwright headless (venv do zambotto-agent-console), captura em 420 px | Extensão do Chrome não conecta nesta máquina; o hook de Read exige captura reduzida | 2026-10-06 |
@@ -113,6 +116,7 @@ CLI: `python -m sua_urna_2026 fetch --uf sp --nomes rmsp --rate 75 --concurrency
 
 | Erro | Contexto | Correção aplicada |
 |------|----------|-------------------|
+| Filas lançadas com `scripts/run_queue.sh $ufs` a partir do zsh receberam a lista inteira como um estado só (zsh não quebra variável sem aspas); o coletor saiu sem baixar nada | Filas do Norte e Nordeste, 2026-10-06 | Lançar laços com lista de estados dentro de `bash -c '...'`, ou usar `${=ufs}` no zsh |
 | Classe `.tema` usada para o botão de tema e para a etiqueta de tema dos cards | Interface v2 | Botão renomeado para `.tema-btn`; conferir colisão de classe ao criar componente novo |
 
 ---
