@@ -1,0 +1,49 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Progresso da coleta</title>
+<meta name="robots" content="noindex">
+<meta name="description" content="Andamento da coleta dos boletins de urna por estado e município, com estimativa de tempo.">
+<link rel="stylesheet" href="style.css">
+<script>
+  // Theme boot: apply the saved choice before first paint. "system" leaves data-theme unset.
+  (function () { try { var t = localStorage.getItem("tema"); if (t === "dark" || t === "light") document.documentElement.setAttribute("data-theme", t); } catch (e) {} })();
+</script>
+
+<style>
+  table { width: 100%; border-collapse: collapse; font-size: 0.95rem; }
+  th, td { text-align: left; padding: 8px 6px; border-bottom: 1px solid var(--line); vertical-align: top; }
+  th { color: var(--muted); font-weight: 600; }
+  td.num, th.num { text-align: right; font-variant-numeric: tabular-nums; white-space: nowrap; }
+  .meter { height: 10px; background: var(--ausente); border-radius: 999px; overflow: hidden; border: 1px solid var(--line); }
+  .meter span { display: block; height: 100%; background: var(--flavio); }
+  .meter.done span { background: var(--ok); }
+  .lista-mun { columns: 2; column-gap: 16px; font-size: 0.9rem; color: var(--muted); margin: 8px 0 0; padding-left: 18px; }
+  @media (min-width: 560px) { .lista-mun { columns: 3; } }
+</style>
+</head>
+<body>
+<header class="topo wrap">
+  <div class="topbar"><p class="kicker">Sua urna</p><button id="tema" type="button" class="tema-btn" aria-label="Alternar tema claro e escuro" title="Tema"><span class="sol">☼</span><span class="lua">☾</span></button></div>
+  <h1>Progresso da coleta</h1>
+  <p class="sub">Quais estados e municípios já têm boletim por seção no site.</p>
+  <p id="resumo" class="brasil"></p>
+</header>
+<main class="wrap">
+  <section class="card">
+    <h2>Por estado, na ordem da fila</h2>
+    <p class="ajuda">A unidade de progresso é o município: as zonas e seções dele chegam todas de uma vez quando ele fecha. A estimativa usa a velocidade medida na própria coleta e vale para a fila inteira, um estado por vez.</p>
+    <table id="tabela"><thead><tr><th>Estado</th><th class="num">Municípios</th><th class="num">Seções</th><th>Andamento</th><th class="num">Falta</th></tr></thead><tbody></tbody></table>
+  </section>
+  <section class="card" id="detalhe" hidden>
+    <h2 id="detalhe-titulo"></h2>
+    <ol id="detalhe-lista" class="lista-mun"></ol>
+  </section>
+  <p class="fonte"><a href="index.html">Voltar ao site</a>. Para forçar a atualização dos índices: <code>python -m sua_urna_2026 reindex</code>. Esta página se atualiza sozinha a cada minuto.</p>
+</main>
+<script src="tema.js"></script>
+<script src="progresso.js"></script>
+</body>
+</html>

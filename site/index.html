@@ -1,0 +1,122 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Sua Urna 2026</title>
+<meta name="robots" content="noindex">
+<meta name="description" content="Quantas pessoas da sua seção eleitoral decidem o segundo turno de 2026, e como conversar com elas. Números oficiais do TSE, seção por seção.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,700;12..96,800&family=Public+Sans:ital,wght@0,400;0,600;0,700;1,400&display=swap">
+<link rel="stylesheet" href="style.css">
+<script>
+  // Theme boot: apply the saved choice before first paint. "system" leaves data-theme unset.
+  (function () { try { var t = localStorage.getItem("tema"); if (t === "dark" || t === "light") document.documentElement.setAttribute("data-theme", t); } catch (e) {} })();
+</script>
+</head>
+<body>
+<header class="hero">
+  <div class="wrap">
+    <div class="topbar"><p class="kicker">Segundo turno, 25 de outubro</p><button id="tema" type="button" class="tema-btn" aria-label="Alternar tema claro e escuro" title="Tema"><span class="sol">☼</span><span class="lua">☾</span></button></div>
+    <h1>Sua urna</h1>
+    <p class="lead">A eleição não vai ser decidida por 150 milhões de pessoas. Vai ser decidida na sua seção, por gente que você conhece pelo nome.</p>
+    <div class="hero-num">
+      <span id="hero-num" class="big">1 em 48</span>
+      <span id="hero-lab" class="lab">pessoas que votaram no Lula convencendo uma pessoa viram o Brasil.</span>
+    </div>
+    <div class="sala-wrap">
+      <p class="kicker">A urna média do Brasil</p>
+      <div id="sala" class="sala" role="img" aria-label="Urna média do Brasil, um ponto por eleitor"></div>
+      <ul id="sala-legenda" class="legenda"></ul>
+      <p id="sala-texto" class="sala-texto"></p>
+    </div>
+    <a class="cta" href="#busca">Ver a minha seção</a>
+  </div>
+</header>
+
+<main class="wrap">
+  <div id="tiles" class="tiles"></div>
+
+  <section id="busca" class="panel">
+    <div class="sec-head">
+      <p class="kicker">Passo 1</p>
+      <h2>Encontre a sua seção</h2>
+      <p class="muted small">Zona e seção estão no seu título, no e-Título ou no comprovante de votação. Este site não pede nem guarda o número do título. Nada que você escolher aqui sai do seu celular.</p>
+    </div>
+    <div class="campos">
+      <label>Estado <select id="uf"><option value="">Escolha</option></select></label>
+      <label>Município <select id="municipio" disabled><option value="">Escolha o estado</option></select></label>
+      <label>Zona <select id="zona" disabled><option value="">Escolha o município</option></select></label>
+      <label>Seção <select id="secao" disabled><option value="">Escolha a zona</option></select></label>
+    </div>
+    <p id="status" class="status" aria-live="polite"></p>
+  </section>
+
+  <section id="resultado" class="panel resultado" hidden>
+    <p class="kicker">Passo 2</p>
+    <h2>A sua sala</h2>
+    <p id="onde" class="onde"></p>
+    <div id="sala-secao" class="sala mini" role="img" aria-label="Eleitores desta seção, um ponto por pessoa"></div>
+    <div id="barra" class="barra" aria-hidden="true"></div>
+    <ul id="numeros" class="numeros"></ul>
+    <p id="conta" class="conta"></p>
+    <p id="soltos" class="soltos"></p>
+    <div class="acoes">
+      <button id="copiar" type="button">Copiar texto para o WhatsApp</button>
+      <button id="imagem" type="button" class="ghost">Gerar imagem</button>
+    </div>
+    <div id="preview" class="preview"><img id="preview-img" alt="Imagem da sua seção para compartilhar"><p class="small muted">Toque e segure a imagem para salvar ou compartilhar. <a id="baixar" href="#" download="sua-urna.png">Baixar</a>.</p></div>
+    <p class="fonte">Fonte: boletim de urna oficial do TSE, 1º turno, 04/10/2026. <a href="https://resultados.tse.jus.br/oficial/app/index.html#/eleicao/6257/uf/br/cargo/1/vis/nominal/dados-de-urna/boletim-de-urna" target="_blank" rel="noopener">Confira no site do TSE</a>. Estados e municípios ainda em coleta: <a href="progresso.html">veja o progresso</a>.</p>
+  </section>
+
+  <section id="kits">
+    <div class="sec-head">
+      <p class="kicker">Passo 3</p>
+      <h2>Com quem falar</h2>
+      <p class="muted">Ninguém convence 33 milhões de pessoas. Você convence duas ou três que conhece pelo nome. Quem é a pessoa?</p>
+    </div>
+    <div id="personas" class="pessoas" role="tablist"></div>
+    <div id="kit" class="kit" role="tabpanel"></div>
+  </section>
+
+  <section id="votar">
+    <div class="sec-head">
+      <p class="kicker">Passo 4</p>
+      <h2>Como votar no dia 25</h2>
+    </div>
+    <ol class="passos">
+      <li><span>Quem não votou no 1º turno pode votar normalmente no 2º. Cada turno é uma eleição separada. A justificativa do dia 4 vai até 3 de dezembro e não trava nada. <a href="https://exame.com/brasil/quem-nao-votou-no-1o-turno-pode-votar-no-2o-veja-a-regra-do-tse/" target="_blank" rel="noopener">Regra do TSE</a>.</span></li>
+      <li><span>Votação das 8h às 17h no horário de Brasília. Leve documento oficial com foto.</span></li>
+      <li><span>Ônibus, trem e metrô são gratuitos no dia da eleição, nos dois turnos, por determinação do TSE. <a href="https://www.correiobraziliense.com.br/politica/2026/09/7510432-tse-pede-informacoes-sobre-transporte-publico-gratuito-nos-dias-de-votacao.html" target="_blank" rel="noopener">Resolução 23.751/2026, art. 23</a>.</span></li>
+      <li><span>Partido e candidato não podem oferecer transporte ao eleitor. Carona de amigo ou de família pode. Quem tem mais de 70 anos não é obrigado a votar, mas pode.</span></li>
+    </ol>
+  </section>
+
+  <section id="fatos">
+    <div class="sec-head">
+      <p class="kicker">Fontes</p>
+      <h2>Fatos e notícias, com link</h2>
+      <p class="muted">Tudo que os roteiros usam. Cada card tem a fonte, a data e o status: comprovado, em investigação ou arquivado. Investigado não é condenado.</p>
+    </div>
+    <div id="filtros" class="chips"></div>
+    <div id="lista-fatos" class="grid"></div>
+  </section>
+
+  <section>
+    <p class="precedente">Em 2022, Lula venceu o 2º turno por 2.139.645 votos, ou 4,5 por urna. Bolsonaro ganhou 7 milhões de votos entre um turno e outro, Lula 3 milhões, e 253 cidades trocaram de vencedor. Quem sai na frente no 1º turno não está com a vida ganha. Em 2026, o Amapá inteiro foi decidido por 225 votos. <span class="small muted">Levantamento de Filipe Boni a partir das planilhas do TSE, 05/10/2026.</span></p>
+  </section>
+</main>
+
+<footer class="wrap">
+  <p>Responsável: Iuri Zambotto, eleitor, pessoa física. Site sem financiamento de partido, candidato ou empresa, sem impulsionamento pago, sem anúncio e sem coleta de dados. Opinião de eleitor, com números oficiais do TSE.</p>
+  <p>Nenhum conteúdo deste site foi gerado com voz ou imagem sintética. Os textos foram escritos com apoio de ferramenta de inteligência artificial e revisados por pessoa.</p>
+  <p><a href="progresso.html">Progresso da coleta</a></p>
+</footer>
+<div id="toast" class="toast" role="status"></div>
+
+<script src="tema.js"></script>
+<script src="kits.js"></script>
+<script src="app.js"></script>
+</body>
+</html>
