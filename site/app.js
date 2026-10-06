@@ -396,11 +396,17 @@
         <a class="cta" id="whats-kit" target="_blank" rel="noopener" href="#">Mandar mensagem no WhatsApp</a>
         <button type="button" class="ghost" id="copiar-kit">Copiar este roteiro</button>
       </div>
-      <p class="small muted">A mensagem abre no WhatsApp para você escolher a pessoa e editar antes de enviar.${state.last ? " O link leva aos números da sua seção." : " Escolha a sua seção acima e o link passa a levar aos números dela."}</p>`;
-    const texto = !state.last && k.mensagemGeral ? k.mensagemGeral : k.mensagem;
-    const msg = `${texto} ${shareUrl(`wa-${k.id}`)}`;
-    $("whats-kit").href = `https://wa.me/?text=${encodeURIComponent(msg)}`;
-    $("whats-kit").addEventListener("click", () => track("whatsapp-roteiro", { perfil: k.id, ...onde3() }));
+      <p class="small muted">A mensagem abre no WhatsApp para você escolher a pessoa e editar antes de enviar. O link leva à sua cidade e, se você escolheu a seção, aos números dela.</p>`;
+    const linkKit = () => {
+      const texto = !state.last && k.mensagemGeral ? k.mensagemGeral : k.mensagem;
+      return `https://wa.me/?text=${encodeURIComponent(`${texto} ${shareUrl(`wa-${k.id}`)}`)}`;
+    };
+    $("whats-kit").href = linkKit();
+    // Built again on click: the visitor may have picked a city or section after the script was shown.
+    $("whats-kit").addEventListener("click", (ev) => {
+      ev.currentTarget.href = linkKit();
+      track("whatsapp-roteiro", { perfil: k.id, ...onde3() });
+    });
     $("copiar-kit").addEventListener("click", async () => {
       const text = [k.titulo, "", `Para abrir: ${k.abrir}`, "", ...k.fatos.map((fid) => { const f = fato(fid); return f ? `- ${f.texto} (${f.fonte}, ${f.data}: ${f.url})` : ""; }), "", `O que não dizer: ${k.naoDizer.join(" ")}`, "", `Para fechar: ${k.fechar}`].join("\n");
       try { await navigator.clipboard.writeText(text); } catch (e) { /* ignore */ }
