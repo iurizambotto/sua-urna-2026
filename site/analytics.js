@@ -39,7 +39,8 @@
   if (cfg.provider === "goatcounter" && cfg.goatcounter) {
     // Count the page without the hash: the hash carries the section, which we never record.
     window.goatcounter = { no_onload: true, allow_local: Boolean(cfg.allowLocal) };
-    s.src = "https://gc.zgo.at/count.js";
+    // Served from this site: blockers often list gc.zgo.at. ISC licensed copy of https://gc.zgo.at/count.js
+    s.src = "vendor/goatcounter-count.js?v=20261006";
     s.setAttribute("data-goatcounter", "https://" + cfg.goatcounter + ".goatcounter.com/count");
     s.onload = function () {
       var r = origem();
