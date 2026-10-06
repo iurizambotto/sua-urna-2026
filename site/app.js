@@ -397,7 +397,8 @@
         <button type="button" class="ghost" id="copiar-kit">Copiar este roteiro</button>
       </div>
       <p class="small muted">A mensagem abre no WhatsApp para você escolher a pessoa e editar antes de enviar.${state.last ? " O link leva aos números da sua seção." : " Escolha a sua seção acima e o link passa a levar aos números dela."}</p>`;
-    const msg = `${k.mensagem} ${shareUrl(`wa-${k.id}`)}`;
+    const texto = !state.last && k.mensagemGeral ? k.mensagemGeral : k.mensagem;
+    const msg = `${texto} ${shareUrl(`wa-${k.id}`)}`;
     $("whats-kit").href = `https://wa.me/?text=${encodeURIComponent(msg)}`;
     $("whats-kit").addEventListener("click", () => track("whatsapp-roteiro", { perfil: k.id, ...onde3() }));
     $("copiar-kit").addEventListener("click", async () => {

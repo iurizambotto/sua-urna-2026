@@ -71,6 +71,7 @@ window.TEMAS = {
 window.KITS = [
   { id: "voltou", titulo: "Quem votou no Lula em 2022 e mudou", stat: "Quase 7 por urna. Vale por dois.", glifo: "lula",
     mensagem: "Oi! Vi os números da nossa seção e lembrei de você. Sem briga, juro, só queria te mostrar:",
+    mensagemGeral: "Oi! Achei um site que mostra, seção por seção, quanto falta pra virar a eleição. Lembrei de você. Sem briga, juro, só queria te mostrar:",
     quem: "É o cunhado que disse \"cansei\", a colega que queria mudança. São quase 7 por urna, mais do que a diferença inteira. Se voltar, vale por dois: um voto sai de lá e entra aqui.",
     abrir: "O que te fez mudar? Quero entender, não discutir.",
     fatos: ["F01", "F02", "F14"],
@@ -106,6 +107,7 @@ window.KITS = [
     fechar: "O próprio Caiado disse que ele não tem condição. Em branco é melhor do que isso." },
   { id: "setenta", titulo: "Quem tem 70+ e não foi votar", stat: "17 milhões. Quase metade falta.", glifo: "ausente",
     mensagem: "Oi! Dia 25 eu te levo pra votar, combinado? Que horário fica melhor? O ônibus também é de graça nesse dia. Os números da nossa seção:",
+    mensagemGeral: "Oi! Dia 25 eu te levo pra votar, combinado? Que horário fica melhor? O ônibus também é de graça nesse dia. Olha que interessante:",
     quem: "Avô, avó, vizinha. São 17 milhões de eleitores com mais de 70 anos e quase metade falta. Foi o grupo que mais voltou no 2º turno de 2022. O problema é carona, não convicção.",
     abrir: "Vou te levar pra votar dia 25. Que horas é melhor pra você?",
     fatos: ["F16", "F17", "F20"],
@@ -113,6 +115,7 @@ window.KITS = [
     fechar: "Combina o horário agora e manda mensagem na sexta pra lembrar." },
   { id: "nulo", titulo: "Quem votou branco ou nulo", stat: "6 milhões. 12 por urna.", glifo: "branco",
     mensagem: "Vi quantas pessoas da nossa seção votaram em branco ou nulo e fiquei pensando. Se tivesse que escolher um dos dois, qual seria? Olha isso:",
+    mensagemGeral: "Vi quanta gente votou em branco ou nulo no 1º turno e fiquei pensando. Se tivesse que escolher um dos dois, qual seria? Olha isso:",
     quem: "Saiu de casa, pegou fila e disse \"nenhum me serve\". O recado é legítimo, mas não chega em ninguém.",
     abrir: "Se você fosse obrigado a escolher um dos dois, qual seria?",
     fatos: ["F18", "F01", "F04"],
