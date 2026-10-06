@@ -219,11 +219,11 @@
       $("conta").textContent = "Esta seção não tem boletim próprio no TSE. Em geral isso acontece quando ela votou junto com outra seção, na mesma urna.";
       const t = state.mun.totais;
       $("soltos").textContent = `No município inteiro: ${fmt(t.aptos)} aptos, ${fmt(t.abstencao)} não foram votar, ${fmt(t.brancos + t.nulos)} votaram branco ou nulo. Flávio ${fmt(t.votos["22"] || 0)}, Lula ${fmt(t.votos["13"] || 0)}.`;
-      $("copiar").hidden = true; $("imagem").hidden = true;
+      $("copiar").hidden = true; $("imagem").hidden = true; $("whats").hidden = true;
       r.scrollIntoView({ behavior: reduced ? "auto" : "smooth", block: "start" });
       return;
     }
-    $("copiar").hidden = false; $("imagem").hidden = false;
+    $("copiar").hidden = false; $("imagem").hidden = false; $("whats").hidden = false;
     const m = summarize(s);
     $("onde").textContent = `${onde}. ${fmt(m.aptos)} eleitores nesta sala.`;
     const seq = [["flavio", m.flavio], ["lula", m.lula], ["terceira", m.terceira + m.outros], ["branco", m.brancoNulo], ["ausente", m.ausentes]];
@@ -248,6 +248,7 @@
     const soltos = m.ausentes + m.brancoNulo + m.terceira;
     $("soltos").textContent = `${fmt(soltos)} pessoas desta sala não escolheram nenhum dos dois que estão no segundo turno: ${fmt(m.ausentes)} não apareceram, ${fmt(m.brancoNulo)} votaram branco ou nulo e ${fmt(m.terceira)} votaram em Cury, Renan ou Caiado. Você conhece alguma delas.`;
     state.last = { s, m, onde };
+    $("whats").href = `https://wa.me/?text=${encodeURIComponent(shareText())}`;
     if (state.kit) renderKit(state.kit);
     r.scrollIntoView({ behavior: reduced ? "auto" : "smooth", block: "start" });
   }
@@ -451,6 +452,7 @@
   sel.zona.addEventListener("change", onZona);
   sel.secao.addEventListener("change", onSecao);
   $("baixar").addEventListener("click", () => track("baixar-imagem", onde3()));
+  $("whats").addEventListener("click", () => track("whatsapp-secao", onde3()));
   document.addEventListener("click", (ev) => {
     const a = ev.target.closest("a[data-fato]");
     if (a) track("fonte", { fato: a.dataset.fato });

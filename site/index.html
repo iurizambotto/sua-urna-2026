@@ -19,9 +19,9 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,700;12..96,800&family=Public+Sans:ital,wght@0,400;0,600;0,700;1,400&display=swap">
-<link rel="stylesheet" href="style.css">
-<script src="config.js"></script>
-<script src="analytics.js" defer></script>
+<link rel="stylesheet" href="style.css?v=202610061403">
+<script src="config.js?v=202610061403"></script>
+<script src="analytics.js?v=202610061403" defer></script>
 <script>
   // Theme boot: apply the saved choice before first paint. "system" leaves data-theme unset.
   (function () { try { var t = localStorage.getItem("tema"); if (t === "dark" || t === "light") document.documentElement.setAttribute("data-theme", t); } catch (e) {} })();
@@ -75,7 +75,8 @@
     <p id="conta" class="conta"></p>
     <p id="soltos" class="soltos"></p>
     <div class="acoes">
-      <button id="copiar" type="button">Copiar texto para o WhatsApp</button>
+      <a id="whats" class="cta" target="_blank" rel="noopener" href="#">Enviar no WhatsApp</a>
+      <button id="copiar" type="button" class="ghost">Copiar texto</button>
       <button id="imagem" type="button" class="ghost">Gerar imagem</button>
     </div>
     <div id="preview" class="preview"><img id="preview-img" alt="Imagem da sua seção para compartilhar"><p class="small muted">Toque e segure a imagem para salvar ou compartilhar. <a id="baixar" href="#" download="sua-urna.png">Baixar</a>.</p></div>
@@ -127,8 +128,8 @@
 </footer>
 <div id="toast" class="toast" role="status"></div>
 
-<script src="tema.js"></script>
-<script src="kits.js"></script>
-<script src="app.js"></script>
+<script src="tema.js?v=202610061403"></script>
+<script src="kits.js?v=202610061403"></script>
+<script src="app.js?v=202610061403"></script>
 </body>
 </html>
