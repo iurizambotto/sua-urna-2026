@@ -23,7 +23,7 @@ Caiado: 43% Flávio / 19% Lula / 36%
 Lula 50% x Flávio 40% entre mulheres. Rejeição: Flávio 50%, Lula 44%. PL lançou "Brasil por Elas" (internet e creche).
 
 ## Apoios
-Cury: silêncio total. Renan: não pede voto, disse que Flávio será presidente. Caiado: consulta Kassab; PSD neutro, diretórios liberados. Zema: contra PT.
+Cury: silêncio total. Renan: não pede voto, disse que Flávio será presidente e liberou os eleitores. Caiado: declarou apoio a Flávio em 06/10/2026, em Goiânia (InfoMoney, Gazeta do Povo). PSD: neutro, diretórios liberados (Metrópoles). Zema: contra PT. Atualizado em 2026-10-07.
 Debates 2o turno: 11/10 Band, 18/10 Record, 23/10 Globo. AtlasIntel 1a pesquisa 2o turno: 09/10.
 
 ## Abstenção 2022 (Gazeta do Povo)

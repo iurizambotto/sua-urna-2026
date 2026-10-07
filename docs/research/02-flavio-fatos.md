@@ -11,6 +11,9 @@ project: sua-urna-2026
 Regra: "investigado", nunca "condenado". Rachadinha: STJ anulou por competência (2021), TJ-RJ rejeitou denúncia por falta de justa causa (2022). Não é absolvição de mérito nem condenação.
 
 ## Agro / Caiado
+- ATUALIZAÇÃO 2026-10-07: Caiado declarou apoio a Flávio em 06/10/2026, em Goiânia: "Pode contar com o nosso apoio, estamos a sua disposição" e "Estou aqui para fazer o que manda a minha coerência na vida, que é poder derrotar o PT". Flávio: "a gente vai arregaçar com vagabundo". PSD neutro, diretórios liberados. [infomoney.com.br/politica/caiado-declara-apoio-a-flavio-bolsonaro-no-2o-turno-estamos-a-sua-disposicao/; gazetadopovo.com.br/eleicoes/2026/caiado-oficializa-apoio-a-flavio-bolsonaro-no-segundo-turno/; metropoles.com/brasil/psd-declara-neutralidade-no-2o-turno-das-eleicoes-presidenciais]
+- Caiado em 15/09/2026, Aparecida de Goiânia: "a população está se apaixonando pelos dois maiores assaltantes que o Brasil conhece", sobre Lula e Flávio. [em.com.br/politica/2026/09/7502656-caiado-diz-que-brasil-esta-se-apaixonando-pelos-assaltantes-lula-e-flavio.html, 17/09/2026; original citado: O Globo]
+- A afirmação anterior "Kassab: chance de colaborar com Flávio é zero" saiu do site por não ter sido confirmada em fonte primária e por ter sido superada pela neutralidade do PSD.
 - Caiado (16/06/2026, Jovem Pan): Flávio "perdeu a condição de ganhar" de Lula; cobrou esclarecer Banco Master. Pós-1o turno: "sempre fui oposição ao Lula", não citou Flávio. Kassab: chance de colaborar com Flávio é "zero". [congressoemfoco 119686; metropoles; poder360]
 - Flávio votou contra regulamentação da reforma tributária (PLP 108/24, 51x10), "IVA de 28%". [infomoney; congressoemfoco 112521]
 - Propostas agro 2026: propriedade, adubo nacional, seguro rural, securitização, regularização fundiária, armas no campo, mais Plano Safra. Bancada do agro e Tereza Cristina apoiam Flávio. [gazetadopovo propostas-candidatos-presidente-agro]
